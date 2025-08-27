@@ -90,3 +90,21 @@ config interface 'lan'
         option ip6assign '60'
         option gateway '192.168.24.1'
 ```
+将容器commit为新镜像  
+```
+docker commit openwrt openwrt-myself:latest
+```
+验证是否创建成功  
+```
+docker images | grep openwrt-custom
+```
+导出镜像为本地文件  
+```
+docker save -o openwrt-custom.tar openwrt-custom:latest
+```
+其他机器导入镜像  
+```
+# 语法：docker load -i [镜像文件.tar]
+docker load -i openwrt-custom.tar
+```
+
