@@ -29,8 +29,9 @@ sudo ip link set eth0 promisc on
 ```  
 2：创建网络(须结合实际网络情况修改IP部分，使用与主路由同网段IP和主路由网关地址，不能照抄命令，不然无法正常联网)  
 ```
-docker network create -d macvlan --subnet=192.168.24.0/24 --gateway=192.168.24.1 -o parent=eth0 macnet
-```  
+docker network create -d macvlan --subnet=192.168.24.0/24 --gateway=192.168.24.1 --ip-range=192.168.24.254/32 -o parent=eth0 macnet
+```
+`--ip-range=192.168.24.254/32`强制指定openwrt容器的地址  
 查看是否生效：  
 ```
 docker network inspect macnet
