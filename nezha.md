@@ -1,5 +1,5 @@
 # 哪吒面板自用步骤
-**执行`./nmp.sh`脚本，安装nginx反代**  
+**执行`./nmp.sh`脚本，安装Nginx Proxy Manager 反代**  
 执行安装哪吒面板脚本：
 ```
 curl -L https://raw.githubusercontent.com/nezhahq/scripts/refs/heads/main/install.sh -o nezha.sh && chmod +x nezha.sh && sudo ./nezha.sh
