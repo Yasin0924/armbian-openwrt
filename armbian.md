@@ -135,7 +135,7 @@ docker images | grep openwrt-custom
 ```
 导出镜像为本地文件  
 ```
-docker save -o openwrt-custom.tar openwrt-custom:latest
+docker save -o openwrt-myself.tar openwrt-myself:latest
 ```
 其他机器导入镜像  
 ```
