@@ -4,7 +4,42 @@
 **命令：**  
 ```
 docker run --name easytier --net=host --privileged --restart=always -d m.daocloud.io/docker.io/easytier/easytier:latest --hostname nas  -i 10.166.166.1/24 -n 192.168.24.0/24 --vpn-portal wg://0.0.0.0:11013/10.16.11.0/24 --network-name 账户 --network-secret '密码' -p tcp://自建服务器IP:11010 -p tcp://public.easytier.top:11010
-```  
+```
+**docker compose 安装**
+**docker-compose.yml文件**
+```
+services:
+  watchtower: # 用于自动更新easytier镜像，若不需要请删除这部分
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+      - WATCHTOWER_NO_STARTUP_MESSAGE
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 3600 --cleanup --label-enable
+  easytier:
+    image: easytier/easytier:latest # 国内用户可以使用 m.daocloud.io/docker.io/easytier/easytier:latest
+    hostname: easytier
+    container_name: easytier
+    labels:
+      com.centurylinklabs.watchtower.enable: 'true'
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    environment:
+      - TZ=Asia/Shanghai
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - /etc/easytier:/root
+      - /etc/machine-id:/etc/machine-id:ro # 映射宿主机机器码
+    command: -d --hostname nas  -i 10.166.166.1/24 -n 192.168.24.0/24 --vpn-portal wg://0.0.0.0:11013/10.16.11.0/24 --network-name <用户> --network-secret <密码> -p tcp://自建服务器IP:11010 -p tcp://public.easytier.cn:11010
+```
+
 **解释:**  
 `-i 10.166.166.1/24`表示该core启动生效的IP，注意不要与已有冲突  
 `-n 192.168.24.0/24`表示该core代理IP地址段，一般是家庭局域网地址段  
