@@ -167,3 +167,9 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 
 ```
+
+# 3、windows11下设置easytier自启动 #
+执行以下代码  
+```
+sc create easytier start= auto binPath= "\"D:\Program Files\easytier-manager-pro\resource\easytier-core.exe\" -c \"D:\Program Files\easytier-manager-pro\config\Yasin.toml\""
+```
