@@ -142,4 +142,28 @@ docker save -o openwrt-myself.tar openwrt-myself:latest
 # 语法：docker load -i [镜像文件.tar]
 docker load -i openwrt-custom.tar
 ```
+# 2、casaos安装Home Assistant后，需要修改配置 #
+HA 默认只信任本地直连请求。
+如果你通过反向代理（NPM）访问，NPM 会在请求里加上 X-Forwarded-For、X-Forwarded-Proto 这样的 HTTP 头，告诉后端「用户的真实 IP、请求协议」。
+没有配置 trusted_proxies 时，HA 会认为这个请求是伪造的，直接返回 400: Bad Request  
+修改`configuration.yaml`配置
+```
+# Loads default set of integrations. Do not remove. 
+default_config:
 
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 10.166.166.0/24   # 你的VPN网段
+    - 172.17.0.0/16     # Docker默认bridge网段（HA容器常用）
+    - 127.0.0.1
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+```
