@@ -37,7 +37,7 @@ services:
     volumes:
       - /etc/easytier:/root
       - /etc/machine-id:/etc/machine-id:ro # 映射宿主机机器码
-    command: -d --hostname nas  -i 10.166.166.1/24 -n 192.168.24.0/24 --vpn-portal wg://0.0.0.0:11013/10.16.11.0/24 --network-name <用户> --network-secret '<密码>' -p tcp://自建服务器IP:11010 -p tcp://public.easytier.cn:11010
+    command: --hostname nas  -i 10.166.166.1/24 -n 192.168.24.0/24 --vpn-portal wg://0.0.0.0:11013/10.16.11.0/24 --network-name <用户> --network-secret '<密码>' -p tcp://自建服务器IP:11010 -p tcp://public.easytier.cn:11010
 ```
 
 **解释:**  
