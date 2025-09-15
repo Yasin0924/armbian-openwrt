@@ -48,7 +48,7 @@ services:
 EOF
 
 echo "🚀 启动 Nginx Proxy Manager..."
-docker-compose up -d
+docker compose up -d
 
 echo "✅ 安装完成！"
 echo "🔹 访问管理面板：http://$(hostname -I | awk '{print $1}'):$PORT_PANEL"
