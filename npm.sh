@@ -24,8 +24,8 @@ mkdir -p /etc/docker/npm && cd /etc/docker/npm
 read -rp "请输入 HTTP 端口（默认80）: " PORT_HTTP
 PORT_HTTP=${PORT_HTTP:-80}
 
-read -rp "请输入 管理面板端口（默认81）: " PORT_PANEL
-PORT_PANEL=${PORT_PANEL:-81}
+read -rp "请输入 管理面板端口（默认18008）: " PORT_PANEL
+PORT_PANEL=${PORT_PANEL:-18008}
 
 read -rp "请输入 HTTPS 端口（默认443）: " PORT_HTTPS
 PORT_HTTPS=${PORT_HTTPS:-443}
