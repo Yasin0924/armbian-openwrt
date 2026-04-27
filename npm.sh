@@ -40,7 +40,7 @@ services:
     restart: unless-stopped
     ports:
       - '${PORT_HTTP}:80'
-      - '${PORT_PANEL}:81'
+      - '${PORT_PANEL}:18008'
       - '${PORT_HTTPS}:443'
     volumes:
       - ./data:/data
